@@ -1,7 +1,11 @@
-﻿// Learn more about F# at http://fsharp.org
-// See the 'F# Tutorial' project for more help.
+﻿open System.IO
+//Part One
+File.ReadAllText("c:\\temp\\day1.txt")
+    |> Seq.sumBy (fun i -> if i = '(' then 1 else -1)
 
-[<EntryPoint>]
-let main argv = 
-    printfn "%A" argv
-    0 // return an integer exit code
+//Part B
+
+File.ReadAllText("c:\\temp\\day1.txt")
+    |> Seq.map (fun d -> if d = '(' then 1 else -1)
+    |> Seq.scan (+) 0 
+    |> Seq.findIndex (fun f -> f = -1)
