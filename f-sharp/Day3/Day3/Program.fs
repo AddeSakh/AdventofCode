@@ -9,11 +9,19 @@
 [<EntryPoint>]
 let main argv = 
     let input = System.IO.File.ReadAllText("""C:\temp\day3.txt""")
-    let result1 = 
+    let day1 = 
         input
           |> Seq.scan location (0,0)
           |> Seq.distinct
           |> Seq.length
-    printfn "For first: %d got them" result1
+    let day2 = 
+        input
+          |> Seq.scan (fun (x,y) c -> (location y c, x)) ((0,0),(0,0))
+          |> Seq.map fst
+          |> Seq.distinct
+          |> Seq.length
+    printfn "For first : %d got them" day1
+    printfn "For 2nd: %d got them" day2
     printfn "%A" argv
     0 // return an integer exit code
+
